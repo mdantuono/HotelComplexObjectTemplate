@@ -14,6 +14,11 @@ var hotel = {
             name: "Luxury Suite",
             price: "$250.00",
             available: 5
+        },
+        {
+            name: "Penthouse",
+            price: "$5000.00",
+            available: 2
         }
     ],
     name: "CareerDevs Innt"
@@ -26,6 +31,7 @@ function displayDetails(room) {
     document.getElementById('price').innerHTML = hotel.rooms[room].price;
 }
 
+//display rooms as radio options
 for (var i = 0; i < hotel.rooms.length; i++) {
     var radioBtn = document.createElement("INPUT");
     var radioLabel = document.createElement("LABEL");
@@ -39,8 +45,32 @@ for (var i = 0; i < hotel.rooms.length; i++) {
     document.getElementById('radialSection').appendChild(radioBtn);
     document.getElementById('radialSection').appendChild(radioLabel);
 }
-//display rooms as radio options
 
-//on form submission confirm radio was selected
-
-//and checkbox checked
+//form validation
+document.getElementById('reservationForm').onsubmit = function(event) {
+   event.preventDefault(); 
+   
+   //check if terms are agreed to
+   if (!document.getElementById('confirmation').checked) {
+       alert("Please agree to the Terms and Conditions");
+       return;
+   }
+   
+   var radios = document.getElementsByName('rooms');
+   var roomSelection = "";
+   
+   for (var i = 0; i < radios.length; i++) {
+       if(radios[i].checked) {
+           roomSelection = radios[i].value;
+           break;
+       }
+   }
+   
+   if (roomSelection == "") {
+       alert("No selection made");
+       return;
+   }
+   
+   alert("Thank you for reserving the " + 
+   hotel.rooms[parseInt(roomSelection)].name + ".");
+};
