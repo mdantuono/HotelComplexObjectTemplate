@@ -19,18 +19,22 @@ var hotel = {
     name: "CareerDevs Innt"
 };
 
-// console.log(document.getElementById('label').nodeName);
+// console.log(document.getElementById('label').nodeName); TO FIND NODE NAME
+
+function displayDetails(room) {
+    document.getElementById('available').innerHTML = hotel.rooms[room].available;
+    document.getElementById('price').innerHTML = hotel.rooms[room].price;
+}
 
 for (var i = 0; i < hotel.rooms.length; i++) {
-    console.log("start");
     var radioBtn = document.createElement("INPUT");
     var radioLabel = document.createElement("LABEL");
     radioBtn.setAttribute("type", "radio");
     radioBtn.setAttribute("name", "rooms");
     radioBtn.setAttribute("value", i);
     radioBtn.setAttribute("id", "room" + i);
+    radioBtn.setAttribute("onclick", "displayDetails(" + i + ")");
     radioLabel.innerHTML = hotel.rooms[i].name;
-    console.log("stop");
     
     document.getElementById('radialSection').appendChild(radioBtn);
     document.getElementById('radialSection').appendChild(radioLabel);
